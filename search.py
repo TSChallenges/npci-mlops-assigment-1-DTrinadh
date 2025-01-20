@@ -1,3 +1,4 @@
+#code for Linux seaching operations using python
 import re
 
 def grep(pattern, file_name):
@@ -6,13 +7,28 @@ def grep(pattern, file_name):
             if re.search(pattern, line):
                 print(line.strip())
     return 
+#grep function testing was completed
 
-def sed(old_pattern, new_patten, file_name):
-    # ... 
-    return 
+
+def sed(old_pattern, new_pattern, file_name):
+    with open(file_name, 'r') as fp:
+        lines = fp.readlines()  # Read all lines into memory
+    
+    with open(file_name, 'w') as fp:
+        for line in lines:
+            new_line = re.sub(old_pattern, new_pattern, line)  # Replace pattern
+            fp.write(new_line)  # Write the modified line back to the file
+
+    return
 
 def awk(n, file_name):
-    # ...
+    n = int(n)
+    with open(file_name, 'r') as fp:
+        for line in fp:
+            # Split the line into words (by default, split on whitespace)
+            words = line.split()
+            if len(words) >= n:
+                print(words[n-1])  # Print the nth column (1-based index)
     return 
 
 def main():
